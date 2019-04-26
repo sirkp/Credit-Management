@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Credit Management</string>
+    <string name="viewAllUsers">View all users</string>
+    <string name="showTable">Show table</string>
+    <string-array name="userss_array">
+        <item>Pradeep Kumar</item>
+        <item>Priyank Gupta</item>
+        <item>Prashant Sengar</item>
+        <item>Dhiraj Sharma</item>
+        <item>Amit Yadav</item>
+        <item>Akhand Singh</item>
+        <item>Sonu Kumar</item>
+        <item>Pawandeep Kumar</item>
+        <item>Rahul Sharma</item>
+        <item>Dev Kant Chouhan</item>
+    </string-array>
+</resources>

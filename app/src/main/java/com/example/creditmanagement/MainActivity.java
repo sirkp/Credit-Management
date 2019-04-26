@@ -1,0 +1,28 @@
+package com.example.creditmanagement;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import static com.example.creditmanagement.ViewAllUsers.users;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Button viewAllUser = (Button)findViewById(R.id.bt_view_all_user);
+        viewAllUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ViewAllUsers.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/all_user_format_name"
+        android:textSize="24sp"
+        android:paddingLeft="16dp"
+        android:layout_height="wrap_content"
+        tools:text="User Kumar"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/all_user_format_email"
+        android:layout_width="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        tools:text="pradeepkumar0560@gmail.com"
+        android:layout_height="wrap_content" />
+</LinearLayout>
