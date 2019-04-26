@@ -20,7 +20,9 @@ public class User {
     public void addCredit(int credit){this.credit+=credit;}
 
     public void subCredit(int credit){
-        if(this.credit>=credit)
         this.credit-=credit;
+    }
+    public boolean isTransactionPossible(int credit){
+        return (this.credit>=credit);
     }
 }

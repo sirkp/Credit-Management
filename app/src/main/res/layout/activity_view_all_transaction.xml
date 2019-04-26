@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ViewAllTransaction">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:text="Sender"/>
+
+        <TextView
+            android:textSize="24sp"
+            android:layout_width="0dp"
+            android:gravity="center_horizontal"
+            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:text="Reciever"/>
+
+        <TextView
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Amount"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#606366"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/all_transaction"
+        android:layout_height="match_parent">
+    </ListView>
+</LinearLayout>

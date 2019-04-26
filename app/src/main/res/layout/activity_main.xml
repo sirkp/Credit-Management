@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_marginBottom="24dp"
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_height="0dp"
@@ -16,17 +17,18 @@
 
         <Button
             android:textSize="24sp"
-            android:id="@+id/bt_view_all_user"
+            android:id="@+id/bt_all_user"
             android:layout_width="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_gravity="bottom"
             android:layout_marginTop="16dp"
-            android:text="@string/viewAllUsers"
+            android:text="All Users"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
 
     <LinearLayout
+        android:layout_marginTop="24dp"
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_height="0dp"
@@ -35,11 +37,13 @@
 
         <Button
             android:textSize="24sp"
+            android:id="@+id/bt_all_transaction"
+            android:onClick="viewAllTransaction"
             android:layout_width="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:gravity="top"
-            android:text="@string/viewAllUsers"
+            android:text="All Transactions"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
