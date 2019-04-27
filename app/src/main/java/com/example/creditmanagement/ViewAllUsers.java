@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ViewAllUsers extends AppCompatActivity {
     DatabaseHelper myDb;
-    
+
     static ArrayList<User> users=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,10 @@ public class ViewAllUsers extends AppCompatActivity {
         Cursor cursor = myDb.getAllData();
         if(cursor.getCount()==0)
         addData();
-        //viewAll();
+        viewAll();
         //updateData();
         //deleteData();
+        //updateId();
     }
 
     public void addData(){
@@ -88,6 +89,12 @@ public class ViewAllUsers extends AppCompatActivity {
     public void updateData(){
         boolean isUpdated= myDb.updateData("Disha Kumar",198);
         Log.e("isUpdated: ",""+isUpdated);
+        viewAll();
+    }
+
+    public void updateId(){
+        for(int i=0;i<10;i++)
+            myDb.updateId(""+(i+15),""+(i+1));
         viewAll();
     }
 

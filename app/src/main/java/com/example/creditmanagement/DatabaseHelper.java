@@ -10,9 +10,10 @@ import android.support.annotation.Nullable;
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "User.db";
     public static final String TABLE_NAME = "user_table";
-    public static final String COL_1 = "NAME";
-    public static final String COL_2 = "EMAIL";
-    public static final String COL_3 = "CREDIT";
+    public static final String COL_1 = "ID";
+    public static final String COL_2 = "NAME";
+    public static final String COL_3 = "EMAIL";
+    public static final String COL_4 = "CREDIT";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -20,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (NAME TEXT,EMAIL TEXT,CREDIT INTEGER)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,EMAIL TEXT,CREDIT INTEGER)");
 
 
     }
@@ -34,9 +35,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean insertData(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1,user.getName());
-        contentValues.put(COL_2,user.getEmail());
-        contentValues.put(COL_3,user.getCredit());
+        contentValues.put(COL_2,user.getName());
+        contentValues.put(COL_3,user.getEmail());
+        contentValues.put(COL_4,user.getCredit());
         long result=db.insert(TABLE_NAME,null,contentValues);
         if(result==-1)
             return false;
@@ -53,9 +54,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean updateData(String name,int credit) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_3,credit);
+        contentValues.put(COL_4,credit);
         db.update(TABLE_NAME, contentValues, "NAME = ?",new String[] {name});
         return true;
+    }
+    public void updateId(String oldId, String newId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1,newId);
+        db.update(TABLE_NAME, contentValues, "ID = ?",new String[] {oldId});
     }
 
     public int deleteData(String id){
