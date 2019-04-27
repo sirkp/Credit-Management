@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class ViewAllUsers extends AppCompatActivity {
+    DatabaseHelper myDb;
 
     static ArrayList<User> users=new ArrayList<>();
     @Override
@@ -17,6 +19,7 @@ public class ViewAllUsers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_users);
 
+        myDb = new DatabaseHelper(this);
         users.add(new User("Pradeep Kumar","pradeepkumar0560@gmail.com", 100));
         users.add(new User("Priyank Gupta","priyankgupta21@gmail.com", 120));
         users.add(new User("Prashant Sengar","prashantsengar73@gmail.com", 130));
@@ -44,7 +47,16 @@ public class ViewAllUsers extends AppCompatActivity {
             }
         });
 
+        addData();
 
+    }
+
+    public void addData(){
+        boolean isInserted = myDb.insertData(users.get(0));
+        if(isInserted == true)
+            Toast.makeText(ViewAllUsers.this,"Data Inserted",Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(ViewAllUsers.this,"Data not Inserted",Toast.LENGTH_LONG).show();
     }
 
 }

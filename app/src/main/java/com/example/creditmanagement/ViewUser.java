@@ -62,6 +62,8 @@ public class ViewUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String sAmount = etCredit.getText().toString();
+                if(sAmount.equals(""))
+                sAmount="0";
                 User recieverUser=getUser(spinnerUserName);
                 Log.e("check",spinnerUserName+" samount: "+sAmount);
                 int amount=Integer.parseInt(sAmount);
