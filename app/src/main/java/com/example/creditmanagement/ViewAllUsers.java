@@ -1,8 +1,10 @@
 package com.example.creditmanagement;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 
 public class ViewAllUsers extends AppCompatActivity {
     DatabaseHelper myDb;
-
+    
     static ArrayList<User> users=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +48,53 @@ public class ViewAllUsers extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        Cursor cursor = myDb.getAllData();
+        if(cursor.getCount()==0)
         addData();
-
+        //viewAll();
+        //updateData();
+        //deleteData();
     }
 
     public void addData(){
-        boolean isInserted = myDb.insertData(users.get(0));
-        if(isInserted == true)
-            Toast.makeText(ViewAllUsers.this,"Data Inserted",Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(ViewAllUsers.this,"Data not Inserted",Toast.LENGTH_LONG).show();
+        boolean isInserted=false;
+        for(int i=0;i<10;i++)
+            isInserted = myDb.insertData(users.get(i));
+
+        viewAll();
+
+
+    }
+
+    public void viewAll(){
+        Cursor cursor = myDb.getAllData();
+        if(cursor.getCount()==0){
+            Toast.makeText(ViewAllUsers.this, "No data could br retrieved",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        StringBuffer buffer = new StringBuffer();
+        String name="",email="",credit="";
+        while(cursor.moveToNext()){
+            buffer.append("Id: "+cursor.getString(0)+"\n");
+           name= buffer.append("Name: "+cursor.getString(1)+"\n").toString();
+            email=buffer.append("Email: "+cursor.getString(2)+"\n").toString();
+            credit=buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
+        }
+        Log.e("DATABASE",buffer.toString());
+
+    }
+
+    public void updateData(){
+        boolean isUpdated= myDb.updateData("Disha Kumar",198);
+        Log.e("isUpdated: ",""+isUpdated);
+        viewAll();
+    }
+
+    public void deleteData(){
+        int noOfRows = myDb.deleteData("1");
+        viewAll();
+
     }
 
 }
