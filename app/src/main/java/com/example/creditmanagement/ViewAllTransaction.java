@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import static com.example.creditmanagement.ViewAllUsers.users;
+import static com.example.creditmanagement.MainActivity.users;
 
 
 public class ViewAllTransaction extends AppCompatActivity {

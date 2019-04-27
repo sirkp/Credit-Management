@@ -22,7 +22,12 @@ public class User {
     public void subCredit(int credit){
         this.credit-=credit;
     }
+
     public boolean isTransactionPossible(int credit){
         return (this.credit>=credit);
+    }
+
+    public void setCredit(int credit){
+        this.credit=credit;
     }
 }

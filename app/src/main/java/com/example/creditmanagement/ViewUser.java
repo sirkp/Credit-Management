@@ -1,5 +1,6 @@
 package com.example.creditmanagement;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,11 +12,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.creditmanagement.MainActivity.users;
 import static com.example.creditmanagement.SpinnerActivity.spinnerUserName;
 import static com.example.creditmanagement.ViewAllTransaction.transactions;
-import static com.example.creditmanagement.ViewAllUsers.users;
 
 public class ViewUser extends AppCompatActivity {
+    DatabaseHelper myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,10 @@ public class ViewUser extends AppCompatActivity {
 
         //getting object from name of object
         final User user = getUser(userName);
+
+        //intialising database
+        myDb = new DatabaseHelper(this);
+
 
         //setting views
         TextView tvUserName = (TextView) findViewById(R.id.tv_user_name);
@@ -75,12 +81,13 @@ public class ViewUser extends AppCompatActivity {
                     tvUserCredit.setText(""+user.getCredit());
                     transactions.add(new Transaction(user.getName(),recieverUser.getName(),amount));
                     Toast.makeText(ViewUser.this,"Transfer Successfull",Toast.LENGTH_SHORT).show();
+                     updateData(user);
+                     updateData(recieverUser);
                 }
                 else
                 {
                     Toast.makeText(ViewUser.this,"Transaction not possible",Toast.LENGTH_SHORT).show();
                 }
-                Log.e("Paisa",""+user.getCredit()+" <-u  r-> "+recieverUser.getCredit());
             }
         });
 
@@ -90,11 +97,34 @@ public class ViewUser extends AppCompatActivity {
         for(int i=0;i<users.size();i++){
             if(name.equals(users.get(i).getName()))
             {
-                Log.e("match:",users.get(i).getName());
                 return users.get(i);
 
             }
         }
         return null;
+    }
+
+    public void updateData(User user){
+        boolean isUpdated= myDb.updateData(user.getName(),user.getCredit());
+        Log.e("isUpdated: ",""+isUpdated);
+    }
+
+    public void viewAll(){
+        Cursor cursor = myDb.getAllData();
+        if(cursor.getCount()==0){
+            Toast.makeText(ViewUser.this, "No data could br retrieved",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        StringBuffer buffer = new StringBuffer();
+        String name="",email="",credit="";
+        while(cursor.moveToNext()){
+            buffer.append("Id: "+cursor.getString(0)+"\n");
+            name= buffer.append("Name: "+cursor.getString(1)+"\n").toString();
+            email=buffer.append("Email: "+cursor.getString(2)+"\n").toString();
+            credit=buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
+        }
+        Log.e("DATABASE",buffer.toString());
+
     }
 }

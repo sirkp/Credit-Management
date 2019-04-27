@@ -50,6 +50,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor=db.rawQuery("select * from "+TABLE_NAME,null);
         return cursor;
     }
+    public Cursor getRow(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor=db.rawQuery("select NAME, EMAIL, CREDIT from "+TABLE_NAME+" WHERE ID = ?",new String[]{id});
+        return cursor;
+    }
 //updating by name
     public boolean updateData(String name,int credit) {
         SQLiteDatabase db = this.getWritableDatabase();
