@@ -12,12 +12,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.creditmanagement.MainActivity.transactions;
 import static com.example.creditmanagement.MainActivity.users;
 import static com.example.creditmanagement.SpinnerActivity.spinnerUserName;
-import static com.example.creditmanagement.ViewAllTransaction.transactions;
 
 public class ViewUser extends AppCompatActivity {
     DatabaseHelper myDb;
+    TransactionDatabase myTb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class ViewUser extends AppCompatActivity {
 
         //intialising database
         myDb = new DatabaseHelper(this);
-
+        myTb=new TransactionDatabase((this));
 
         //setting views
         TextView tvUserName = (TextView) findViewById(R.id.tv_user_name);
@@ -80,6 +81,8 @@ public class ViewUser extends AppCompatActivity {
                     etCredit.setText("");
                     tvUserCredit.setText(""+user.getCredit());
                     transactions.add(new Transaction(user.getName(),recieverUser.getName(),amount));
+                    intialiseDatabase(new Transaction(user.getName(),recieverUser.getName(),amount));
+                    viewAll();
                     Toast.makeText(ViewUser.this,"Transfer Successfull",Toast.LENGTH_SHORT).show();
                      updateData(user);
                      updateData(recieverUser);
@@ -109,22 +112,51 @@ public class ViewUser extends AppCompatActivity {
         Log.e("isUpdated: ",""+isUpdated);
     }
 
+    public void intialiseDatabase(Transaction transaction){
+        boolean isInserted=false;
+        isInserted = myTb.insertData(transaction);
+        Log.e("isInserted: ",""+isInserted);
+    }
+
     public void viewAll(){
-        Cursor cursor = myDb.getAllData();
+        Cursor cursor = myTb.getAllData();
         if(cursor.getCount()==0){
             Toast.makeText(ViewUser.this, "No data could br retrieved",Toast.LENGTH_SHORT).show();
             return;
         }
 
         StringBuffer buffer = new StringBuffer();
-        String name="",email="",credit="";
         while(cursor.moveToNext()){
             buffer.append("Id: "+cursor.getString(0)+"\n");
-            name= buffer.append("Name: "+cursor.getString(1)+"\n").toString();
-            email=buffer.append("Email: "+cursor.getString(2)+"\n").toString();
-            credit=buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
+            buffer.append("Name: "+cursor.getString(1)+"\n").toString();
+            buffer.append("Email: "+cursor.getString(2)+"\n").toString();
+            buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
+        }
+        Log.e("NO OF ROWS--> ",cursor.getCount()+"");
+        Log.e("DATABASE_Transcation",buffer.toString());
+
+    }
+
+   /* public void insertTransaction(Transaction transaction){
+       boolean isInserted= myDb.insertDataTransaction(transaction);
+    }
+
+    public void showAllTransaction(){
+        Cursor cursor = myDb.getAllDataTransaction();
+        if(cursor.getCount()==0){
+            Toast.makeText(ViewUser.this, "No data could br retrieved",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        StringBuffer buffer = new StringBuffer();
+        while(cursor.moveToNext()){
+            buffer.append("Id: "+cursor.getString(0)+"\n");
+            buffer.append("Sender Name: "+cursor.getString(1)+"\n").toString();
+            buffer.append("Reciever Name: "+cursor.getString(2)+"\n").toString();
+            buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
         }
         Log.e("DATABASE",buffer.toString());
 
-    }
+    }*/
+
 }

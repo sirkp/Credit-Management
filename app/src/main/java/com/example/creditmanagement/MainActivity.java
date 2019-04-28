@@ -2,6 +2,7 @@ package com.example.creditmanagement;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,14 +13,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    static ArrayList<Transaction> transactions = new ArrayList<>();
     static ArrayList<User> users=new ArrayList<>();
     DatabaseHelper myDb;
+    TransactionDatabase myTb;
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setUsers();
         Button viewAllUser = (Button)findViewById(R.id.bt_all_user);
         viewAllUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         myDb = new DatabaseHelper(this);
+        myTb=new TransactionDatabase(this);
+
 
         Cursor cursor = myDb.getAllData();
         if(cursor.getCount()==0)
@@ -38,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         viewAll();
         getRow();
+        getRowTransaction();
+        viewAllTransaction();
+        //showAllTransaction();
 
     }
 
@@ -71,16 +79,52 @@ public class MainActivity extends AppCompatActivity {
         }
 
         StringBuffer buffer = new StringBuffer();
-        String name="",email="",credit="";
         while(cursor.moveToNext()){
             buffer.append("Id: "+cursor.getString(0)+"\n");
-            name= buffer.append("Name: "+cursor.getString(1)+"\n").toString();
-            email=buffer.append("Email: "+cursor.getString(2)+"\n").toString();
-            credit=buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
+            buffer.append("Name: "+cursor.getString(1)+"\n").toString();
+            buffer.append("Email: "+cursor.getString(2)+"\n").toString();
+            buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
         }
         Log.e("DATABASE",buffer.toString());
 
     }
+
+    public void viewAllTransaction(){
+        Cursor cursor = myTb.getAllData();
+        if(cursor.getCount()==0){
+            Toast.makeText(MainActivity.this, "No data could br retrieved",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        StringBuffer buffer = new StringBuffer();
+        while(cursor.moveToNext()){
+            buffer.append("Id: "+cursor.getString(0)+"\n");
+            buffer.append("Name: "+cursor.getString(1)+"\n").toString();
+            buffer.append("Email: "+cursor.getString(2)+"\n").toString();
+            buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
+        }
+        //Log.e("NO OF ROWS--> ",cursor.getCount()+"");
+        Log.e("DATABASE_Transcation",buffer.toString());
+
+    }
+
+    /*public void showAllTransaction(){
+        Cursor cursor = myDb.getAllDataTransaction();
+        if(cursor.getCount()==0){
+            Toast.makeText(MainActivity.this, "No data could br retrieved",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        StringBuffer buffer = new StringBuffer();
+        while(cursor.moveToNext()){
+            buffer.append("Id: "+cursor.getString(0)+"\n");
+            buffer.append("Sender Name: "+cursor.getString(1)+"\n").toString();
+            buffer.append("Reciever Name: "+cursor.getString(2)+"\n").toString();
+            buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
+        }
+        Log.e("DATABASE",buffer.toString());
+
+    }*/
 
     public void getRow() {
         for (int i = 0; i < 10; i++) {
@@ -97,8 +141,33 @@ public class MainActivity extends AppCompatActivity {
                 email = cursor.getString(1);
                 credit = cursor.getInt(2);
             }
-            users.get(i).setCredit(credit);
+            users.add(new User(name,email,credit));
+            //users.get(i).setCredit(credit);
             Log.e("DATABASE", name + " " + email + " " + credit);
+        }
+    }
+
+    public void getRowTransaction() {
+        Cursor newCursor= myTb.getAllData();
+        int count= newCursor.getCount();
+        Log.e("NO OF ROWS--> ",count+"");
+        for (int i = 0; i < count; i++) {
+            Cursor cursor = myTb.getRow(""+(i+1));
+            if (cursor.getCount() == 0) {
+                Toast.makeText(MainActivity.this, "No data could br retrieved", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            StringBuffer buffer = new StringBuffer();
+            String senderName = "", recieverName = "";
+            int credit = 0;
+            if (cursor.moveToNext()) {
+                senderName = cursor.getString(0);
+                recieverName = cursor.getString(1);
+                credit = cursor.getInt(2);
+            }
+            transactions.add(new Transaction(senderName,recieverName,credit));
+            //users.get(i).setCredit(credit);
+            Log.e("DATABASE_Transaction", senderName + " " + recieverName + " " + credit);
         }
     }
 

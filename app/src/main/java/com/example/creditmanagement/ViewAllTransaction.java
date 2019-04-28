@@ -7,12 +7,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import static com.example.creditmanagement.MainActivity.transactions;
 import static com.example.creditmanagement.MainActivity.users;
 
 
 public class ViewAllTransaction extends AppCompatActivity {
-
-    static ArrayList<Transaction> transactions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
