@@ -23,7 +23,5 @@ public class ViewAllTransaction extends AppCompatActivity {
         ListView alltransaction = (ListView)findViewById(R.id.all_transaction);
         alltransaction.setAdapter(allTransactionAdapter);
 
-        for(int i=0;i<10;i++)
-        Log.e("value :",""+users.get(i).getCredit());
     }
 }

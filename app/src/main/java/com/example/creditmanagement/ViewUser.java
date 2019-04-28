@@ -72,7 +72,7 @@ public class ViewUser extends AppCompatActivity {
                 if(sAmount.equals(""))
                 sAmount="0";
                 User recieverUser=getUser(spinnerUserName);
-                Log.e("check",spinnerUserName+" samount: "+sAmount);
+                //Log.e("check",spinnerUserName+" samount: "+sAmount);
                 int amount=Integer.parseInt(sAmount);
 
                 if(user.isTransactionPossible(amount)){
@@ -82,7 +82,6 @@ public class ViewUser extends AppCompatActivity {
                     tvUserCredit.setText(""+user.getCredit());
                     transactions.add(new Transaction(user.getName(),recieverUser.getName(),amount));
                     intialiseDatabase(new Transaction(user.getName(),recieverUser.getName(),amount));
-                    viewAll();
                     Toast.makeText(ViewUser.this,"Transfer Successfull",Toast.LENGTH_SHORT).show();
                      updateData(user);
                      updateData(recieverUser);
@@ -118,45 +117,5 @@ public class ViewUser extends AppCompatActivity {
         Log.e("isInserted: ",""+isInserted);
     }
 
-    public void viewAll(){
-        Cursor cursor = myTb.getAllData();
-        if(cursor.getCount()==0){
-            Toast.makeText(ViewUser.this, "No data could br retrieved",Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        StringBuffer buffer = new StringBuffer();
-        while(cursor.moveToNext()){
-            buffer.append("Id: "+cursor.getString(0)+"\n");
-            buffer.append("Name: "+cursor.getString(1)+"\n").toString();
-            buffer.append("Email: "+cursor.getString(2)+"\n").toString();
-            buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
-        }
-        Log.e("NO OF ROWS--> ",cursor.getCount()+"");
-        Log.e("DATABASE_Transcation",buffer.toString());
-
-    }
-
-   /* public void insertTransaction(Transaction transaction){
-       boolean isInserted= myDb.insertDataTransaction(transaction);
-    }
-
-    public void showAllTransaction(){
-        Cursor cursor = myDb.getAllDataTransaction();
-        if(cursor.getCount()==0){
-            Toast.makeText(ViewUser.this, "No data could br retrieved",Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        StringBuffer buffer = new StringBuffer();
-        while(cursor.moveToNext()){
-            buffer.append("Id: "+cursor.getString(0)+"\n");
-            buffer.append("Sender Name: "+cursor.getString(1)+"\n").toString();
-            buffer.append("Reciever Name: "+cursor.getString(2)+"\n").toString();
-            buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
-        }
-        Log.e("DATABASE",buffer.toString());
-
-    }*/
 
 }

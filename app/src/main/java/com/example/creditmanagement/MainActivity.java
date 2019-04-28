@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ViewAllUsers.class);
-                Log.e("check----","user");
                 startActivity(intent);
             }
         });
@@ -45,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         getRow();
         getRowTransaction();
         viewAllTransaction();
-        //showAllTransaction();
 
     }
 
@@ -71,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         int noOfRows = myDb.deleteData("1");
     }
 
+    //show user database
     public void viewAll(){
         Cursor cursor = myDb.getAllData();
         if(cursor.getCount()==0){
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e("DATABASE",buffer.toString());
 
     }
-
+    //show transaction database
     public void viewAllTransaction(){
         Cursor cursor = myTb.getAllData();
         if(cursor.getCount()==0){
@@ -108,24 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*public void showAllTransaction(){
-        Cursor cursor = myDb.getAllDataTransaction();
-        if(cursor.getCount()==0){
-            Toast.makeText(MainActivity.this, "No data could br retrieved",Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        StringBuffer buffer = new StringBuffer();
-        while(cursor.moveToNext()){
-            buffer.append("Id: "+cursor.getString(0)+"\n");
-            buffer.append("Sender Name: "+cursor.getString(1)+"\n").toString();
-            buffer.append("Reciever Name: "+cursor.getString(2)+"\n").toString();
-            buffer.append("Credit: "+cursor.getString(3)+"\n").toString();
-        }
-        Log.e("DATABASE",buffer.toString());
-
-    }*/
-
+    //update user array
     public void getRow() {
         for (int i = 0; i < 10; i++) {
             Cursor cursor = myDb.getRow(""+(i+1));
@@ -142,15 +124,15 @@ public class MainActivity extends AppCompatActivity {
                 credit = cursor.getInt(2);
             }
             users.add(new User(name,email,credit));
-            //users.get(i).setCredit(credit);
-            Log.e("DATABASE", name + " " + email + " " + credit);
+            //Log.e("DATABASE", name + " " + email + " " + credit);
         }
     }
 
+    //update transaction array
     public void getRowTransaction() {
         Cursor newCursor= myTb.getAllData();
         int count= newCursor.getCount();
-        Log.e("NO OF ROWS--> ",count+"");
+        //Log.e("NO OF ROWS--> ",count+"");
         for (int i = 0; i < count; i++) {
             Cursor cursor = myTb.getRow(""+(i+1));
             if (cursor.getCount() == 0) {
@@ -166,8 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 credit = cursor.getInt(2);
             }
             transactions.add(new Transaction(senderName,recieverName,credit));
-            //users.get(i).setCredit(credit);
-            Log.e("DATABASE_Transaction", senderName + " " + recieverName + " " + credit);
+            //Log.e("DATABASE_Transaction", senderName + " " + recieverName + " " + credit);
         }
     }
 
