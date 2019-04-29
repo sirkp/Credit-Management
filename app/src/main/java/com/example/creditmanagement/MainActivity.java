@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewAll();
         getRow();
+        if(transactions.size()<1)
         getRowTransaction();
         viewAllTransaction();
 
