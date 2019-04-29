@@ -50,9 +50,9 @@ public class ViewUser extends AppCompatActivity {
         TextView tvUserEmail = (TextView)findViewById(R.id.tv_user_email);
         final TextView tvUserCredit = (TextView)findViewById(R.id.tv_user_credit);
 
-        tvUserName.setText(""+user.getName());
-        tvUserEmail.setText(""+user.getEmail());
-        tvUserCredit.setText(""+user.getCredit());
+        tvUserName.setText("Name: "+user.getName());
+        tvUserEmail.setText("Email: "+user.getEmail());
+        tvUserCredit.setText("Credit: "+user.getCredit());
 
         final EditText etCredit = (EditText) findViewById(R.id.et_credit_amount);
 
@@ -75,20 +75,24 @@ public class ViewUser extends AppCompatActivity {
                 //Log.e("check",spinnerUserName+" samount: "+sAmount);
                 int amount=Integer.parseInt(sAmount);
 
-                if(user.isTransactionPossible(amount)){
-                    user.subCredit(amount);
-                    recieverUser.addCredit(amount);
-                    etCredit.setText("");
-                    tvUserCredit.setText(""+user.getCredit());
-                    transactions.add(new Transaction(user.getName(),recieverUser.getName(),amount));
-                    intialiseDatabase(new Transaction(user.getName(),recieverUser.getName(),amount));
-                    Toast.makeText(ViewUser.this,"Transfer Successfull",Toast.LENGTH_SHORT).show();
-                     updateData(user);
-                     updateData(recieverUser);
+                if (!recieverUser.getName().equals(user.getName())) {
+                    if (user.isTransactionPossible(amount)) {
+                        user.subCredit(amount);
+                        recieverUser.addCredit(amount);
+                        etCredit.setText("");
+                        tvUserCredit.setText("" + user.getCredit());
+                        transactions.add(new Transaction(user.getName(), recieverUser.getName(), amount));
+                        intialiseDatabase(new Transaction(user.getName(), recieverUser.getName(), amount));
+                        Toast.makeText(ViewUser.this, "Transfer Successfull", Toast.LENGTH_SHORT).show();
+                        updateData(user);
+                        updateData(recieverUser);
+                    } else {
+                        Toast.makeText(ViewUser.this, "Insuffecient Credit", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else
                 {
-                    Toast.makeText(ViewUser.this,"Transaction not possible",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewUser.this, "Please Select a Different User", Toast.LENGTH_SHORT).show();
                 }
             }
         });

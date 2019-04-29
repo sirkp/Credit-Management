@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/customStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,67 +10,60 @@
 
     <TextView
         android:id="@+id/tv_user_name"
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        style="@style/viewUserText"
         tools:text="Name: "/>
 
     <TextView
         android:id="@+id/tv_user_email"
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        style="@style/viewUserText"
         tools:text="Email: "/>
 
     <TextView
         android:id="@+id/tv_user_credit"
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        style="@style/viewUserText"
+        android:paddingBottom="8dp"
         tools:text="Credit: "/>
 
     <TextView
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Transfer credit"/>
+        android:layout_marginTop="2dp"
+        android:textSize="32sp"
+        android:background="@color/colorButtonNormal"
+        android:gravity="center_horizontal"
+        style="@style/viewUserText"
+        android:paddingTop="8dp"
+        android:text="Transfer credit"
+        android:paddingBottom="8dp"/>
 
     <EditText
+        android:layout_marginTop="16dp"
         android:id="@+id/et_credit_amount"
         android:inputType="number"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:hint="Enter amount of credi "
-        android:layout_height="wrap_content" />
+        android:layout_marginBottom="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:textSize="24dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#fbe2f0"
+        android:hint="Enter amount" />
 
     <LinearLayout
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/viewUserText"
+        android:background="#fbe2f0"
         android:orientation="horizontal">
 
         <TextView
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="User"/>
+            tools:text="Select User"/>
 
         <Spinner
             android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
             android:id="@+id/users_spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

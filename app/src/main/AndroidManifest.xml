@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewAllTransaction"></activity>
-        <activity android:name=".ViewUser" />
-        <activity android:name=".ViewAllUsers" />
+        <activity android:name=".ViewAllTransaction"
+            android:label="ALL TRANSACTION"></activity>
+        <activity android:name=".ViewUser"
+            android:label="User"/>
+        <activity android:name=".ViewAllUsers"
+            android:label="All Users"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/customStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -22,7 +23,7 @@
             android:layout_marginLeft="16dp"
             android:layout_gravity="bottom"
             android:layout_marginTop="16dp"
-            android:text="All Users"
+            android:text="Users"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

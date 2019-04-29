@@ -5,19 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools">
     <TextView
         android:textSize="16sp"
+        android:textStyle="bold"
         android:id="@+id/transaction_sender"
         android:gravity="center_horizontal"
         android:layout_width="0dp"
-        android:layout_weight="2"
+        android:background="#dd0074"
+        android:layout_weight="7"
         android:layout_height="wrap_content"
         tools:text="Pradeep Kumar"/>
 
     <TextView
         android:id="@+id/transaction_reciever"
+        android:background="#dd0074"
+        android:textStyle="bold"
+        android:layout_marginLeft="1dp"
         android:textSize="16sp"
         android:layout_width="0dp"
         android:gravity="center_horizontal"
-        android:layout_weight="2"
+        android:layout_weight="7"
         android:layout_height="wrap_content"
         tools:text="Pawandeep Kumar"/>
 
@@ -26,7 +31,10 @@
         android:id="@+id/transaction_credit"
         android:gravity="center_horizontal"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:textStyle="bold"
+        android:layout_marginLeft="1dp"
+        android:background="#dd0074"
+        android:layout_weight="4"
         android:layout_height="wrap_content"
         tools:text="100"/>
 </LinearLayout>
