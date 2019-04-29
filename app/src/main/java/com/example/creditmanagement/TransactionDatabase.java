@@ -56,4 +56,9 @@ public class TransactionDatabase extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public int deleteData(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME,"ID = ?",new String[] {id});
+    }
+
 }

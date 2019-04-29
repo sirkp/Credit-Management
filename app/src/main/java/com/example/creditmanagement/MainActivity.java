@@ -48,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+
+
+
+
+
     public void viewAllTransaction(View view){
         Intent intent = new Intent(MainActivity.this, ViewAllTransaction.class);
         startActivity(intent);
@@ -70,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
         int noOfRows = myDb.deleteData("1");
     }
 
+    public void deleteDataTransaction(){
+
+        int noOfRows = myTb.deleteData("20");
+        noOfRows = myTb.deleteData("21");
+        noOfRows = myTb.deleteData("22");
+    }
     //show user database
     public void viewAll(){
         Cursor cursor = myDb.getAllData();
