@@ -74,6 +74,10 @@ public class ViewUser extends AppCompatActivity {
                 User recieverUser=getUser(spinnerUserName);
                 //Log.e("check",spinnerUserName+" samount: "+sAmount);
                 int amount=Integer.parseInt(sAmount);
+                if(amount<1){
+                    Toast.makeText(ViewUser.this,"Please Enter Credit Amount",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (!recieverUser.getName().equals(user.getName())) {
                     if (user.isTransactionPossible(amount)) {
